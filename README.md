@@ -10,8 +10,18 @@ this crate generates bindings for the c headers and links `libspeer`.
 cargo check
 ```
 
-by default it builds the c library from source with cmake. if you already have
-speer installed:
+by default it builds the c library for you with cmake. users do not need to
+manually build speer first, but they do need the native build tools:
+
+- cmake
+- a c compiler
+- clang/libclang for bindgen
+- pkg-config if linking an installed copy
+
+the c source is found from `SPEER_SOURCE_DIR` when set, otherwise from
+`../../speer` in this repo layout.
+
+if you already have speer installed:
 
 ```bash
 SPEER_INCLUDE_DIR=/path/to/include SPEER_LIB_DIR=/path/to/lib cargo check --no-default-features

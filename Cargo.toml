@@ -8,6 +8,7 @@ homepage = "https://github.com/jk20342/speer-sys-rust"
 description = "raw rust ffi bindings for speer"
 links = "speer"
 build = "build.rs"
+exclude = [".github/**"]
 
 [features]
 default = ["build-from-source"]
