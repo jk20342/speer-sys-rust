@@ -66,6 +66,16 @@ fn main() {
         builder = add_source_include_dirs(builder, &speer_root);
     }
 
+    if cfg!(feature = "libp2p-identify") {
+        builder = builder.clang_arg("-DSPEER_SYS_BIND_LIBP2P_IDENTIFY");
+        builder = add_source_include_dirs(builder, &speer_root);
+    }
+
+    if cfg!(feature = "libp2p-kad") {
+        builder = builder.clang_arg("-DSPEER_SYS_BIND_LIBP2P_KAD");
+        builder = add_source_include_dirs(builder, &speer_root);
+    }
+
     if cfg!(feature = "full-chat") {
         builder = builder.clang_arg("-DSPEER_SYS_BIND_FULL_CHAT");
         builder = add_source_include_dirs(builder, &speer_root);

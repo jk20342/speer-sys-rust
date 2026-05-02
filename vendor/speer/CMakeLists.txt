@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.15)
 
 project(speer
-    VERSION 0.1.0
+    VERSION 0.2.0
     DESCRIPTION "speer (small peer) implementation in C"
     HOMEPAGE_URL "https://github.com/speer/speer"
     LANGUAGES C
@@ -194,6 +194,8 @@ install(TARGETS speer
 
 install(FILES
     ${SPEER_INCDIR}/speer.h
+    ${SPEER_INCDIR}/speer_libp2p_identify.h
+    ${SPEER_INCDIR}/speer_libp2p_kad.h
     ${SPEER_INCDIR}/speer_libp2p_tcp.h
     DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
 )

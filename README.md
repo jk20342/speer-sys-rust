@@ -32,6 +32,8 @@ SPEER_INCLUDE_DIR=/path/to/include SPEER_LIB_DIR=/path/to/lib cargo check --no-d
 - `build-from-source` - build `libspeer` from the c repo with cmake
 - `static` - link `libspeer` statically
 - `libp2p-tcp` - bind `speer_libp2p_tcp.h`
+- `libp2p-identify` - bind the stable identify facade
+- `libp2p-kad` - bind the stable kad facade over tcp/noise/yamux
 - `full-chat` - bind the extra tcp, mdns, multistream, protobuf, varint,
   ed25519, noise, and yamux surface used by `speer-chat`
 

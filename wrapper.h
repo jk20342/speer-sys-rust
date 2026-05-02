@@ -4,6 +4,14 @@
 #include "speer_libp2p_tcp.h"
 #endif
 
+#ifdef SPEER_SYS_BIND_LIBP2P_IDENTIFY
+#include "speer_libp2p_identify.h"
+#endif
+
+#ifdef SPEER_SYS_BIND_LIBP2P_KAD
+#include "speer_libp2p_kad.h"
+#endif
+
 #ifdef SPEER_SYS_BIND_FULL_CHAT
 #include "speer_internal.h"
 #include "ed25519.h"

@@ -1,6 +1,6 @@
 [package]
 name = "speer-sys"
-version = "0.1.0"
+version = "0.2.0"
 edition = "2021"
 license = "MIT"
 repository = "https://github.com/jk20342/speer-sys-rust"
@@ -28,6 +28,8 @@ include = [
 default = ["build-from-source"]
 build-from-source = ["dep:cmake"]
 full-chat = ["libp2p-tcp"]
+libp2p-identify = []
+libp2p-kad = ["libp2p-tcp", "libp2p-identify"]
 libp2p-tcp = []
 static = []
 
