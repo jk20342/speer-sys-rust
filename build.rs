@@ -96,12 +96,17 @@ fn resolve_speer_source_dir(manifest_dir: &Path) -> PathBuf {
         return PathBuf::from(source_dir);
     }
 
+    let workspace_speer = manifest_dir.join("..").join("..").join("speer");
+    if workspace_speer.join("CMakeLists.txt").exists() {
+        return workspace_speer;
+    }
+
     let vendored = manifest_dir.join("vendor").join("speer");
     if vendored.join("CMakeLists.txt").exists() {
         return vendored;
     }
 
-    manifest_dir.join("..").join("..").join("speer")
+    workspace_speer
 }
 
 #[cfg(feature = "build-from-source")]

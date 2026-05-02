@@ -34,5 +34,10 @@ jobs:
       - name: clippy
         run: cargo clippy --features full-chat -- -D warnings
 
+      - name: doc (rustdoc)
+        env:
+          RUSTDOCFLAGS: -Dwarnings
+        run: cargo doc --no-deps --features full-chat
+
       - name: package
         run: cargo package --allow-dirty

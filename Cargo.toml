@@ -1,11 +1,12 @@
 [package]
 name = "speer-sys"
-version = "0.2.0"
+version = "0.2.1"
 edition = "2021"
 license = "MIT"
 repository = "https://github.com/jk20342/speer-sys-rust"
 homepage = "https://github.com/jk20342/speer-sys-rust"
 description = "raw rust ffi bindings for speer"
+documentation = "https://docs.rs/speer-sys"
 links = "speer"
 build = "build.rs"
 include = [
@@ -23,6 +24,9 @@ include = [
     "vendor/speer/include/**",
     "vendor/speer/src/**",
 ]
+
+[package.metadata.docs.rs]
+features = ["full-chat"]
 
 [features]
 default = ["build-from-source"]

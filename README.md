@@ -27,6 +27,18 @@ if you already have speer installed:
 SPEER_INCLUDE_DIR=/path/to/include SPEER_LIB_DIR=/path/to/lib cargo check --no-default-features
 ```
 
+## documentation
+
+Rustdoc for **this crate only**, from **this repository’s root**:
+
+```bash
+cargo doc --no-deps --open
+```
+
+Output: `./target/doc/speer_sys/`.
+
+Published docs: [`docs.rs/speer-sys`](https://docs.rs/speer-sys/latest/speer_sys/).
+
 ## features
 
 - `build-from-source` - build `libspeer` from the c repo with cmake
