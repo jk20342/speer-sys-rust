@@ -8,7 +8,21 @@ homepage = "https://github.com/jk20342/speer-sys-rust"
 description = "raw rust ffi bindings for speer"
 links = "speer"
 build = "build.rs"
-exclude = [".github/**"]
+include = [
+    "Cargo.toml",
+    "README.md",
+    "build.rs",
+    "wrapper.h",
+    "src/**",
+    "vendor/speer/CMakeLists.txt",
+    "vendor/speer/LICENSE",
+    "vendor/speer/README.md",
+    "vendor/speer/speer.pc.in",
+    "vendor/speer/cmake/**",
+    "vendor/speer/docs/**",
+    "vendor/speer/include/**",
+    "vendor/speer/src/**",
+]
 
 [features]
 default = ["build-from-source"]

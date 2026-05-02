@@ -12,9 +12,6 @@ on:
           - "true"
           - "false"
 
-env:
-  SPEER_SOURCE_DIR: ${{ github.workspace }}/speer-src
-
 jobs:
   publish:
     runs-on: ubuntu-latest
@@ -22,12 +19,6 @@ jobs:
     steps:
       - name: checkout speer-sys
         uses: actions/checkout@v4
-
-      - name: checkout speer c source
-        uses: actions/checkout@v4
-        with:
-          repository: jk20342/speer
-          path: speer-src
 
       - name: setup rust
         uses: dtolnay/rust-toolchain@stable

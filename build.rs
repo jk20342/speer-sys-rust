@@ -8,9 +8,7 @@ fn main() {
     println!("cargo:rerun-if-changed=wrapper.h");
 
     let manifest_dir = PathBuf::from(env::var("CARGO_MANIFEST_DIR").unwrap());
-    let speer_root = env::var_os("SPEER_SOURCE_DIR")
-        .map(PathBuf::from)
-        .unwrap_or_else(|| manifest_dir.join("..").join("..").join("speer"));
+    let speer_root = resolve_speer_source_dir(&manifest_dir);
     let source_include = speer_root.join("include");
 
     let mut include_paths = Vec::new();
@@ -81,6 +79,19 @@ fn main() {
     bindings
         .write_to_file(out_path.join("bindings.rs"))
         .expect("failed to write speer bindings");
+}
+
+fn resolve_speer_source_dir(manifest_dir: &Path) -> PathBuf {
+    if let Some(source_dir) = env::var_os("SPEER_SOURCE_DIR") {
+        return PathBuf::from(source_dir);
+    }
+
+    let vendored = manifest_dir.join("vendor").join("speer");
+    if vendored.join("CMakeLists.txt").exists() {
+        return vendored;
+    }
+
+    manifest_dir.join("..").join("..").join("speer")
 }
 
 #[cfg(feature = "build-from-source")]
