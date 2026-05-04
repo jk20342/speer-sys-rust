@@ -19,6 +19,7 @@
 typedef int socklen_t;
 #define CLOSESOCKET closesocket
 #else
+#include <sys/select.h>
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <arpa/inet.h>
@@ -496,7 +497,26 @@ static void mdns_handle_query(mdns_ctx_t *ctx, const uint8_t *data, size_t len,
 }
 
 int mdns_poll(mdns_ctx_t *ctx, int timeout_ms) {
-    (void)timeout_ms;
+    if (ctx->socket_ipv4 >= 0 && timeout_ms > 0) {
+#if defined(_WIN32)
+        fd_set rfds;
+        SOCKET s = (SOCKET)ctx->socket_ipv4;
+        FD_ZERO(&rfds);
+        FD_SET(s, &rfds);
+        struct timeval tv;
+        tv.tv_sec = (long)(timeout_ms / 1000);
+        tv.tv_usec = (long)((timeout_ms % 1000) * 1000);
+        select(0, &rfds, NULL, NULL, &tv);
+#else
+        fd_set rfds;
+        FD_ZERO(&rfds);
+        FD_SET(ctx->socket_ipv4, &rfds);
+        struct timeval tv;
+        tv.tv_sec = timeout_ms / 1000;
+        tv.tv_usec = (timeout_ms % 1000) * 1000;
+        select(ctx->socket_ipv4 + 1, &rfds, NULL, NULL, &tv);
+#endif
+    }
     struct sockaddr_in from;
     socklen_t from_len = sizeof(from);
     int received = 0;
